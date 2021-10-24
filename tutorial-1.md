@@ -40,6 +40,7 @@ Version: 0.0.0
 Priority: 0
 ```
 This file is where you will put your mod name, id, and who made it, and what version it is and what load priority it is (the load priority might be true).
+<<<<<<< HEAD
 So you should make a new folder call it whatever you want, like CoolMod, or FirstMod, and then create a manifest.succ file.
 and in that file you should type.
 ```
@@ -54,3 +55,6 @@ Once you do that you should fill it out.
 ## Components
 This next part is going to be about components.
 Components are one of the most vital parts of modding, it's what the player can actually interact with and see.
+=======
+So you should make a new folder call it whatever you want, like CoolMod, or FirstMod, and then create a manifest.succ file.
+>>>>>>> 661f77cadb29a1ea25385c78ff9abb23c30a0495
