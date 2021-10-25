@@ -7,7 +7,6 @@ Mods when they have all their folders in will look like this.
 Mod/
     - backgrounds/
     - components/
-    - client/
     - crosshairs/
     - FancyInput/
     - flags/
@@ -18,10 +17,12 @@ Mod/
     - music/
     - palettes/
     - scripts/
-    - shared/
-    - server/
     - settings/
     - sounds/
+    - src/
+        - client/
+        - server/
+        - shared/
     - thumbs/
     - worldtypes/
     - manifest.succ
