@@ -126,6 +126,7 @@ exampleComponent:
 ```
 
 The item would appear in-game as exampleID.exampleComponent
+
 ![image](https://user-images.githubusercontent.com/7610940/138955557-42657956-80c9-4778-9743-2ffcd2a55edf.png)
 
 ### loader/src/server/\<modname-component>.cs
