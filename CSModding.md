@@ -9,7 +9,7 @@ Logic World/GameData
         - src/
             - server/
                 - loader.cs
-                - <modname-component>.cs # does not need to be named this way
+                - <modname-component>.cs # can be named anything just named like this for convention
         - manifest.succ
     - <mod>/
         - components/
