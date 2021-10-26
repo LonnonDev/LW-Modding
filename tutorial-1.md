@@ -55,3 +55,30 @@ Once you do that you should fill it out.
 ## Components
 This next part is going to be about components.
 So you should make a new folder call it whatever you want, like CoolMod, or FirstMod, and then create a manifest.succ file.
+Fill out that file and then create a folder called `components` this is where we are going to create a .succ file that will contain all of our components.
+You can use this as an example component to get a feel for what you can do.
+```
+OrGate:
+    column: "Logic"
+    prefab:
+        blocks:
+            -
+                color: f9991b
+                position: (0, 0, 0)
+                scale: (1, 1, 1)
+        inputs:
+            -
+                position: (-0.25, 0.5, -0.5)
+                rotation: (-90, 0, 0)
+                length: 0.6
+            -
+                position: (0.25, 0.5, -0.5)
+                rotation: (-90, 0, 0)
+                length: 0.6
+        outputs:
+            -
+                position: (0, 0.5, 0.5)
+                rotation: (90, 0, 0)
+    placingRules: Standard
+```
+This creates a symbol and gate like Component named OrGate, it will show up as `modID.OrGate` in game because we have not added localization we will cover than later. 
