@@ -7,16 +7,18 @@ All code examples in this assume you are in a class that extends this
 This returns the ComponentDataManager of the component
 ### Address: ComponentAddress {get; set;}
 This contains the address of the component
-### Inputs: IReadOnlyList<InputPeg> {get;}
+### Inputs: IReadOnlyList\<[InputPeg](CS-InputPeg.md)\> {get;}
 This contains a list of the states of the input pegs of the component
 
 To check if a peg is on or not use ```base.Inputs[PEG].On```
-### Outputs: IReadOnlyList<OutputPeg> {get;}
+### Outputs: IReadOnlyList\<OutputPeg\> {get;}
 This contains a list of the states of the output pegs of the component
   
 To check if a peg is on or not use ```base.Outputs[PEG].On```
   
 And to turn a peg on/off use ```base.Outputs[PEG].On = true/false```
+  
+Note: Outputs maintain state until changed i.e. they stay on until you turn them off
 ### ComponentData
 This contains the data on the component which contains the following fields
 - Type: ComponentType {get;}
@@ -55,7 +57,7 @@ protected override DoLogicUpdate() {
   base.Outputs[0] = !base.Inputs[0]
 }
 ```
-### virtual IReadOnlyList<bool> GetOutputStartList()
+### virtual IReadOnlyList\<bool\> GetOutputStartList()
 Called by the circuit manager to get a list of the starting state of output pegs
 
 Defaults to all off
