@@ -104,3 +104,7 @@ Called when the component is disposed
 Default nothing
 # LogicComponent\<T\>
 This is a special variant of LogicComponent that makes using custom data easier
+  
+It takes a generic argument which is a class that contains the data of the component
+  
+And it overrides the serialize and deserialize functions to bytewise write the and read the properties of the data class
