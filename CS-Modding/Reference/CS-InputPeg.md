@@ -1,25 +1,25 @@
-# InputPeg
-This is the type of the members of the list [LogicComponent](CS-LogicComponent.md).Inputs
+# Input Peg
+This is the type of the members of the list [LogicComponent.Inputs](CS-LogicComponent.md#Inputs)
 
 It is also the type that contains the information used by an input peg
 ## Fields
-### StateId: int {get; set;}
+### `StateId: int {get; set;}`
 This contains the id of the state of the input peg (TODO: More digging to find out what this state is)
-### On: bool {get;}
+### `On: bool {get;}`
 This contains whether or not the peg is activated
-### SecretLinks: IReadOnlyList\<InputPeg\> {get;}
+### `SecretLinks: IReadOnlyList<InputPeg> {get;}`
 Contains all the secret links that this peg has to another peg
-### PhasicLinks: IReadOnlyList\<InputPeg\> {get;}
+### `PhasicLinks: IReadOnlyList<InputPeg> {get;}`
 Contains all the phasic links that this peg is a part of
 
 More on phasic links at the end of this file
-### OneWayPhasicLinkFollowers: IReadOnlyList\<InputPeg\> {get;}
+### `OneWayPhasicLinkFollowers: IReadOnlyList<InputPeg> {get;}`
 This is a list of other input pegs that this peg is a one way phasic link leader to
-### OneWayPhasicLinkLeaders: IReadOnlyList\<InputPeg\> {get;}
+### `OneWayPhasicLinkLeaders: IReadOnlyList<InputPeg> {get;}`
 This is a list of other input pegs that are one way phasic link leaders to this peg
-### readonly LogicComponent: LogicComponent
+### *readonly* `LogicComponent: LogicComponent`
 This is the component this peg is attached to
-### readonly iAddress: InputAddress
+### *readonly* `iAddress: InputAddress`
 This is the address of this input
 ## Methods
 ### void AddSecretLinkWith(InputPeg otherInput)
@@ -53,7 +53,7 @@ A one way phasic link is a link like above but only one peg drives the other rat
 
 Examples
 ## Relay
-```
+```cs
 protected override void DoLogicUpdate() {
   if (base.Inputs[1].On) {
     base.Inputs[0].AddPhasicLinkWith(base.Inputs[2]);
@@ -63,7 +63,7 @@ protected override void DoLogicUpdate() {
 }
 ```
 ## Controlled Buffer
-```
+```cs
 protected override void DoLogicUpdate() {
   if (base.Inputs[1].On) {
     base.Inputs[0].AddOneWayPhasicLinkTo(base.Inputs[2]);

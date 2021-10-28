@@ -1,24 +1,34 @@
-# LogicComponent
-This is the file your component extends to do logic
-
+# Logic Component
+This is the file your component extends to do logic.  
 All code examples in this assume you are in a class that extends this
-## Fields
-### Component: IComponentInWorld {get;}
-This returns the ComponentDataManager of the component
-### Address: ComponentAddress {get; set;}
-This contains the address of the component
-### Inputs: IReadOnlyList\<[InputPeg](CS-InputPeg.md)\> {get;}
-This contains a list of the states of the input pegs of the component
 
-To check if a peg is on or not use ```base.Inputs[PEG].On```
-### Outputs: IReadOnlyList\<OutputPeg\> {get;}
-This contains a list of the states of the output pegs of the component
-  
-To check if a peg is on or not use ```base.Outputs[PEG].On```
-  
-And to turn a peg on/off use ```base.Outputs[PEG].On = true/false```
-  
-Note: Outputs maintain state until changed i.e. they stay on until you turn them off
+## Fields
+Name | Description
+:-- | :--
+`IComponentInWorld {get;}` | Returns the `ComponentDataManager` of the component.
+`ComponentAddress {get; set;}` | Returns the [*`Address`*]()
+
+## Components
+### `IComponentInWorld {get;}`
+This returns the ComponentDataManager of the component.
+
+## Address
+### `ComponentAddress {get; set;}`
+This contains the address of the component
+
+## Inputs
+### `IReadOnlyList<InputPeg> {get;}`
+[Input Pegs](CS-InputPeg.md)  
+
+This contains a list of the states of the input pegs of the component  
+To check if a peg is on or not use
+`base.Inputs[PEG].On`.
+
+## Outputs
+### `IReadOnlyList<OutputPeg> {get;}`
+This contains a list of the states of the output pegs of the component. To check if a peg is on or not use `base.Outputs[PEG].On`. likewise to turn a peg on/off use `base.Outputs[PEG].On = true/false`.
+##### Note: Outputs maintain state until changed i.e. they stay on until you turn them off
+
 ### ComponentData
 This contains the data on the component which contains the following fields
 - Type: ComponentType {get;}
@@ -52,7 +62,7 @@ This is called once after initialization, and after each update to input pegs (e
 This should be overridden to do any logic
 
 Example (Not Gate)
-```
+```cs
 protected override DoLogicUpdate() {
   base.Outputs[0] = !base.Inputs[0]
 }
@@ -71,7 +81,7 @@ Default true
 Override this to have certain pegs not update logic
 
 Example (Only Update On Clock)
-```
+```cs
 protected override bool InputAtIndexShouldTriggerComponentLogicUpdates(int inputIndex) {
   return inputIndex == CLOCK_INDEX;
 }
