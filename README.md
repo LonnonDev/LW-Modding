@@ -1,2 +1,6 @@
-# LW-Modding
-A Repository to provide a step by step guide for modding
+# Logic World - Modding
+Modding in Logic World 
+
+**Logic Script** Modding
+
+**C\#** Modding
