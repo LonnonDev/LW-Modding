@@ -71,7 +71,7 @@ If you want to use the full capabilities of of the component system (inputs, out
 
 Here is an example 
 ```cs
-using LogicWorld.Server.Circuitry;
+using LogicWorld.Server.Components;
 
 namespace exampleID
 {
