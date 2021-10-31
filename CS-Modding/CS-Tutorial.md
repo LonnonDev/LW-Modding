@@ -1,87 +1,17 @@
 # LW - C\# Modding
-## Contents
-1. [Structure](#structure)
-2. [Loader](#loader)
-3. [Mods](#mods)
-
-## Structure
-
-There are two folders required. A mod loader, and the mod itself. The full structure looks like this. Individual elements will be explained further later.
-```
-Logic World/GameData
-    - loader/
-        - src/
-            - server/
-                - loader.cs
-                - <modname-component>.cs #The file name can be anything
-        - manifest.succ
-    - <mod>/
-        - components/
-            - <component>.succ
-        - src/
-            - server/
-                - <non component mod code>.cs   #optional
-        - manifest.succ
-        - ignore #optional
-```
-
-## Loader
-
-The loader's job is to get your component code into the game so your components can reference it to do things. You should plan around using this standard format so everyone can use your mod alongside others in a drag and drop way.
-
-These are the files involved:
-```
-Logic World/GameData
-    - loader/
-        - src/
-            - server/
-                - loader.cs
-        - manifest.succ
-```
-
-You should not distribute the loader files with your mod, expect them to already be there.
-
-### `manifest.succ`
-
-The loader manifest looks like this:
-```
-ID: CML
-Name: CS Mod Loader
-Author: LonnonjamesD
-Version: 1.0.0
-Priority: 100
-```
-Note the priority is 100 which is the maximum. The base game is 99, and the minimum is -100. Mods are loaded in descending priority. This way the loader is always loaded first so that everything is there by the time other mods load.
-
-### `loader.cs`
-This is the code for the loader. It doesn't do anything special by itself, but it's needed for the mod component code to be loaded and compiled for use.
-
-```cs
-using LogicAPI.Server;
-using LogicLog;
-
-public class Loader : ServerMod {
-    protected override void Initialize() {
-        Logger.Info("CSmodLoader initialized");
-    }
-}
-```
 
 ## Mods
 For each mod you would want files to store that additions you want to make to the game.  
 A usual structure looks like:
 ```
 Logic World/GameData
-    - loader/
-        - src/
-            - server/
-                - <modname-component>.cs
     - <mod>/
         - components/
             - <component>.succ
         - src/
             - server/
-                - <non component mod code>.cs #optional
+                - <loader>.cs
+                - <modname-component>.cs
         - manifest.succ
         - ignore #optional
 ```
@@ -133,9 +63,9 @@ The item would appear in-game as `exampleID.exampleComponent`
 
 ![exampleID.exampleComponent](https://user-images.githubusercontent.com/7610940/138955557-42657956-80c9-4778-9743-2ffcd2a55edf.png)
 
-### `loader/src/server/<modname-component>.cs`
+### `<mod>/src/server/<modname-component>.cs`
 
-This is where your component logic goes. It can contain other code too, and you can have multiple components defined in 1 file. If your file is big and you want to split it, you can put any non-component logic in the mod/src/server/ folder. But anything used in code referenced using logicCode in your succ file **MUST** be in here, the rest will not be loaded by the time the component types are compiled. You'll have to use reflection for anything external (so probably just accept the big file). You should prefix the filename with the same name as the mod folder so it's easier to find and delete when removing the mod
+This is where your component logic goes. It can contain other code too, and you can have multiple components defined in 1 file. If your file is big and you want to split it you can create multiple files but make sure to follow the format. But anything used in code referenced using logicCode in your succ file **MUST** be in here, the rest will not be loaded by the time the component types are compiled. You'll have to use reflection for anything external (so probably just accept the big file). You should prefix the filename with the same name as the mod folder so it's easier to find and delete when removing the mod
 
 If you want to use the full capabilities of of the component system (inputs, outputs, updating logic each server tick etc.) your component should extend LogicComponent from LogicWorld.Server.Circuitry.
 
@@ -154,13 +84,20 @@ namespace exampleID
     }
 }
 ```
+And how to load the code you will need to create a new file and name it `Loader.cs` for example and put this code in it.
+```cs
+using LogicAPI.Server;
+using LogicLog;
+
+public class Loader : ServerMod {
+    protected override void Initialize() {
+        Logger.Info("mORecomponents initialized");
+    }
+}
+```
+That is how your mod will be loaded.
 
 This example simply sets the single output to the single input each time the server ticks. More info on [LogicComponent](CS-LogicComponent.md) and its features coming soon™
-
-### `<mod>/src/server/<non component mod code>.cs`
-##### Reminder: Methods referenced by logicCode statements **MUST** go in `loader/src/server/`
-
-You can put any other code in here. It will be compiled and available in the game, however it won't be loaded until after the `loader/src/server/<component>.cs` file has loaded. So if that references any types/methods defined in code in this folder it won't work. Generally you should try to keep all C# code in the `loader/src/server/<component>.cs` file, but *technically* anything here will get compiled and loaded too.
 
 ### `<mod>/ignore`
 If this file is present, the mod will not be loaded.
