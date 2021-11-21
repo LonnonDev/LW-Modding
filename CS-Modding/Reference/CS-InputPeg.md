@@ -44,7 +44,7 @@ This method does the same as AddPhasicLinkWith, but does not do the safety check
 This method adds a one way phasic link from this peg to another peg
 ### void RemoveOneWayPhasicLinkTo(InputPeg otherInput)
 This method removes a one way phasic link from this peg to another peg
-### void ClearAllPhasicLinks()
+### void ClearAllPhasicLinks(InputPeg otherInput)
 This method removes all phasic links this peg is a part of
 # Phasic Links/One Way Phasic Links
 A phasic link is a connection between to pegs where if one peg turns on the other peg immediately (0 ticks) and when both pegs are off the state also immediately updates
